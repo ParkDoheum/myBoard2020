@@ -35,33 +35,7 @@ public class ProfileDetailSev extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getSession().getServletContext().getRealPath("img");
-		System.out.println("path : " + path);
-		/*
-		HttpSession hs = request.getSession();
-		ServletContext sc = hs.getServletContext();
-		String path = sc.getRealPath("img");
-		*/			
-		
-		int size = 1024 * 1024 * 10; //10mb
-		String fileNm = null;
-		String originalFileNm = null;
-		
-		try {
-			MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
-			Enumeration files = mr.getFileNames();
-			String str = (String)files.nextElement();
-			
-			fileNm = mr.getFilesystemName(str);
-			originalFileNm = mr.getOriginalFileName(str);
-			
-			System.out.println("fileNm: " + fileNm);
-			System.out.println("originalFileNm: " + originalFileNm);
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
+		String fileNm = ?;
 		
 	}
 
