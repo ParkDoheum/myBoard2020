@@ -35,7 +35,12 @@ public class ProfileDetailSev extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fileNm = ?;
+		HttpSession hs = request.getSession();
+		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
+				
+		String filePath = String.valueOf(loginUser.getI_user());		
+		String fileNm = Utils.uploadFile(request, filePath);
+		
 		
 	}
 

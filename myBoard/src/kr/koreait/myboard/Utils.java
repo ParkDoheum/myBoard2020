@@ -1,5 +1,6 @@
 package kr.koreait.myboard;
 
+import java.io.File;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,19 @@ public class Utils {
 		String path = request.getSession().getServletContext().getRealPath("img/" + filePath);
 		int size = 1024 * 1024 * 10;
 		
+		//폴더 실제하는지 체크 (없으면 폴더 생성)
+		File file = new File(path);		
+		if(!file.exists()) {
+			System.out.println("폴더 없음!!");			
+			//폴더 생성			
+			file.mkdirs();
+		}
+		
 		try {
 			MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
+						
 			Enumeration files = mr.getFileNames();
-			String str = (String)files.nextElement();
-			
+			String str = (String)files.nextElement();			
 			fileNm = mr.getFilesystemName(str);
 			System.out.println("fileNm: " + fileNm);
 			
