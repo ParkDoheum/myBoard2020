@@ -18,7 +18,7 @@ public class BoardListSev extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//세션에 값세팅
+		//로그인 체크
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
 		if(loginUser == null) {

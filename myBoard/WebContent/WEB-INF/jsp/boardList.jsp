@@ -25,6 +25,9 @@
 		<a href="/boardRegmod">
 			<button>글쓰기</button>
 		</a>
+		<a href="/profileDetail">
+			<button>프로필</button>
+		</a>
 	</div>
 	<div>
 		<table>

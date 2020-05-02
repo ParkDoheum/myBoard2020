@@ -8,6 +8,7 @@
 <title>디테일</title>
 </head>
 <body>
+
 	<div>제목: ${detail.title }</div>
 	<div>조회수: ${detail.hits }</div>
 	<div>작성일시: ${detail.r_dt }</div>
