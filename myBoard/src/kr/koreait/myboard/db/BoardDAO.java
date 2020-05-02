@@ -9,6 +9,8 @@ import java.util.List;
 import kr.koreait.myboard.vo.BoardVO;
 
 public class BoardDAO {
+	
+	//------------------------------------------------- Create (insert)
 	public static int insertBoard(BoardVO param) {
 		int result = 0;
 		
@@ -37,6 +39,8 @@ public class BoardDAO {
 		return result;
 	}
 	
+	
+	//------------------------------------------------- Read (select)
 	public static BoardVO getBoard(BoardVO param) {
 		BoardVO vo = null;
 		
@@ -133,6 +137,9 @@ public class BoardDAO {
 		return list;
 	}
 	
+	
+	
+	//------------------------------------------------- Update (update)
 	//조회수 수정
 	public static int updateBoardHits(BoardVO param) {
 		int result = 0;
@@ -148,6 +155,35 @@ public class BoardDAO {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, param.getI_board());	
 		
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps);
+		}
+		
+		return result;
+	}
+	
+	
+	//------------------------------------------------- Delete (delete)
+	
+	public static int delBoard(BoardVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;		
+		
+		String sql = " DELETE FROM t_board "
+				+ " WHERE i_board = ? "
+				+ " AND i_user = ? ";	
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_board());
+			ps.setInt(2, param.getI_user());
+			
 			result = ps.executeUpdate();
 			
 		} catch (Exception e) {			
