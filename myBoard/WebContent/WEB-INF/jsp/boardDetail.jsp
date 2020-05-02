@@ -18,8 +18,21 @@
 	<c:if test="${loginUser.i_user == detail.i_user }">
 		<div>
 			<button>수정</button>
-			<button>삭제</button>
+			<button onclick="clkDelBtn(${detail.i_board})">삭제</button>
 		</div>
 	</c:if>
+	<script>
+		function clkDelBtn(i_board) {
+			var result = confirm(i_board + '번 글을 삭제하시겠습니까?')
+			if(result) {
+				location.href = '/boardDel?i_board=' + i_board	
+			}
+		}
+	</script>
 </body>
 </html>
+
+
+
+
+
