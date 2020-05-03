@@ -22,6 +22,7 @@ public class Utils {
 	public static String uploadFile(HttpServletRequest request, String filePath) {
 		String fileNm = null;
 		
+		//서버가 돌아가고 있는 소스의 절대경로
 		String path = request.getSession().getServletContext().getRealPath("img/" + filePath);
 		int size = 1024 * 1024 * 10;
 		

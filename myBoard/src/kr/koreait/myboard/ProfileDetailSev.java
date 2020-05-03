@@ -1,7 +1,6 @@
 package kr.koreait.myboard;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
+import kr.koreait.myboard.db.UserDAO;
+import kr.koreait.myboard.vo.UserImgVO;
 import kr.koreait.myboard.vo.UserVO;
 
 @WebServlet("/profileDetail")
@@ -29,6 +27,9 @@ public class ProfileDetailSev extends HttpServlet {
 			return;
 		}
 		
+		String img = UserDAO.getProfileImg(loginUser.getI_user());
+		request.setAttribute("img", img);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profileDetail.jsp");
 		rd.forward(request, response);
 	}
@@ -41,6 +42,12 @@ public class ProfileDetailSev extends HttpServlet {
 		String filePath = String.valueOf(loginUser.getI_user());		
 		String fileNm = Utils.uploadFile(request, filePath);
 		
+		UserImgVO param = new UserImgVO();
+		param.setI_user(loginUser.getI_user());
+		param.setImg(fileNm);
+		
+		int result = UserDAO.regUserImg(param);
+		doGet(request, response);
 		
 	}
 
