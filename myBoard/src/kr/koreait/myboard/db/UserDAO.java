@@ -3,6 +3,8 @@ package kr.koreait.myboard.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import kr.koreait.myboard.vo.UserImgVO;
 import kr.koreait.myboard.vo.UserVO;
@@ -70,6 +72,43 @@ public class UserDAO {
 		return result;
 	}
 	
+	public static List<UserImgVO> getProfileImgList(int i_user) {
+		List<UserImgVO> list = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = " SELECT seq, img "
+				+ " FROM t_user_img "
+				+ " WHERE i_user = ? "
+				+ " ORDER BY seq DESC ";
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, i_user);			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int seq = rs.getInt("seq");
+				String img = rs.getString("img");
+				
+				UserImgVO vo = new UserImgVO();
+				vo.setSeq(seq);
+				vo.setImg(img);
+				
+				list.add(vo);				
+			}
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps, rs);
+		}
+		
+		return list;
+	}
 	
 	public static String getProfileImg(int i_user) {
 		String img = null;

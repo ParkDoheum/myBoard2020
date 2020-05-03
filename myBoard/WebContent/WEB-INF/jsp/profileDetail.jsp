@@ -14,6 +14,7 @@
 	  height: 250px;
 	  overflow: hidden;
 	  border-radius: 50%;
+	  border: 1px solid #f1f2f6;
 	}
 	
 	.circular--portrait img {
@@ -33,7 +34,9 @@
 				<img src="/img/noProfile.png" alt="프로필 이미지 없음">
 			</c:if>
 			<c:if test="${img != null}">
-				<img src="/img/${loginUser.i_user}/${img}" alt="프로필 이미지">
+				<a href="/profileImgs">
+					<img src="/img/${loginUser.i_user}/${img}" alt="프로필 이미지">
+				</a>
 			</c:if>
 		</div>
 		<div class="frmContainer">
