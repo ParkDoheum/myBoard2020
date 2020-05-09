@@ -10,6 +10,8 @@ import kr.koreait.myboard.vo.UserImgVO;
 import kr.koreait.myboard.vo.UserVO;
 
 public class UserDAO {
+	
+	//--------------------------------------------------------- Create (Insert) -------------------//
 
 	// return 0:에러 발생, 1:등록이 잘 됐음
 	public static int joinUser(UserVO param) {
@@ -47,19 +49,15 @@ public class UserDAO {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO t_user_img " + 
+		String sql = " INSERT INTO t_user_img " + 
 				" (i_user, seq, img) " + 
-				" SELECT " + 
-				" ?, ifnull(max(seq), 0) + 1, ? " + 
-				" FROM t_user_img " + 
-				" WHERE i_user = ? ";
-		
+				" VALUES " + 
+				" (?, 1, ?) ";		
 		try {
 			con = DbBridge.getCon();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, param.getI_user());
-			ps.setString(2, param.getImg());
-			ps.setInt(3, param.getI_user());
+			ps.setString(2, param.getImg());			
 			
 			result = ps.executeUpdate();
 			
@@ -72,6 +70,9 @@ public class UserDAO {
 		return result;
 	}
 	
+	
+	
+	//--------------------------------------------------------- Read (Select) -------------------//
 	public static List<UserImgVO> getProfileImgList(int i_user) {
 		List<UserImgVO> list = new ArrayList();
 		
@@ -118,15 +119,12 @@ public class UserDAO {
 		
 		String sql = " SELECT img FROM t_user_img "
 				+ " WHERE i_user = ? "
-				+ " AND seq = ( "
-				+ " SELECT max(seq) FROM t_user_img "
-				+ " WHERE i_user = ?)";
+				+ " AND seq = 1 ";
 		
 		try {
 			con = DbBridge.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, i_user);
-			ps.setInt(2, i_user);
+			ps.setInt(1, i_user);			
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -189,5 +187,37 @@ public class UserDAO {
 
 		return result;
 	}
+	
+	//--------------------------------------------------------- Update (Update) -------------------//
+	public static void updUserImgAddSeq(UserImgVO param) {		
+		Connection con = null;
+		PreparedStatement ps = null;		
+
+		String sql = " UPDATE t_user_img"
+				+ " SET seq = seq + 1 "
+				+ " WHERE i_user = ? "
+				+ " ORDER BY seq DESC ";
+
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_user());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps);
+		}
+	}
+	
+	
+	//--------------------------------------------------------- Delete (Delete) -------------------//
 
 }
+
+
+
+
+
+
+

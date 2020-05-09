@@ -34,7 +34,7 @@ public class ProfileDetailSev extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-
+	//프로필 이미지 업로드
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
@@ -46,6 +46,7 @@ public class ProfileDetailSev extends HttpServlet {
 		param.setI_user(loginUser.getI_user());
 		param.setImg(fileNm);
 		
+		UserDAO.updUserImgAddSeq(param);		
 		int result = UserDAO.regUserImg(param);
 		doGet(request, response);
 		
