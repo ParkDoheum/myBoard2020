@@ -116,7 +116,7 @@ public class BoardDAO {
 		return totalPageCnt;
 	}
 	
-	public static List<BoardVO> getBoardList() {
+	public static List<BoardVO> getBoardList(BoardVO param) {
 		List<BoardVO> list = new ArrayList();
 		
 		Connection con = null;
@@ -132,11 +132,15 @@ public class BoardDAO {
 				+ " LEFT JOIN t_user_img C " 
  				+ " ON A.i_user = C.i_user "
 				+ " AND C.seq = 1 "
-				+ " ORDER BY r_dt DESC ";
+				+ " ORDER BY r_dt DESC"
+				+ " LIMIT ?, ? ";
 		
 		try {
 			con = DbBridge.getCon();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getsIdx());
+			ps.setInt(2, param.getRowCnt());
+			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

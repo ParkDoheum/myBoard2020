@@ -11,7 +11,22 @@ public class BoardVO {
 	
 	private String u_nickname;
 	private String img;
-			
+	
+	private int sIdx; //LIMIT 앞값
+	private int rowCnt; //LIMIT 뒷값
+		
+	public int getsIdx() {
+		return sIdx;
+	}
+	public void setsIdx(int sIdx) {
+		this.sIdx = sIdx;
+	}
+	public int getRowCnt() {
+		return rowCnt;
+	}
+	public void setRowCnt(int rowCnt) {
+		this.rowCnt = rowCnt;
+	}
 	public String getImg() {
 		return img;
 	}

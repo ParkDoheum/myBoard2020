@@ -15,11 +15,28 @@
 		border-collapse: collapse;
 		width: 80%;
 	}
-	
+	a {
+		text-decoration: none;		
+	}
 	th, td { border: 1px solid #000; }
 	.fontCenter { text-align: center; }
 	.pointer { 	cursor: pointer; }
 	.trSelected:hover { background-color: #ecf0f1 }
+	#pageContainer {
+		margin-top: 40px;
+		display: flex;
+		justify-content: center;
+	}
+	#pageContainer span {
+		color: #3498db;
+	}
+	#pageContainer a:not(:last-child) {
+		margin-right: 30px;
+	}
+	.selected {
+		font-weight: bold;
+		color: red !important;
+	}
 </style>
 </head>
 <body>
@@ -54,10 +71,15 @@
 				</td>
 			</tr>
 			</c:forEach>
-		</table>
-		
-		<div>
-			${totalPageCnt }
+		</table>		
+		<div id="pageContainer">
+			<c:forEach var="i" begin="1" end="${totalPageCnt }">				
+				<a href="/boardList?page=${i}">
+				<span <c:if test="${i == page}">class="selected"</c:if>>				
+				${i}
+				</span>
+				</a>
+			</c:forEach>			
 		</div>
 	</div>
 	<script>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.koreait.myboard.db.BoardDAO;
+import kr.koreait.myboard.vo.BoardVO;
 import kr.koreait.myboard.vo.UserVO;
 
 @WebServlet("/boardList")
@@ -25,11 +26,23 @@ public class BoardListSev extends HttpServlet {
 			response.sendRedirect("/login");
 			return;
 		}
+		
+		int page = 1;
+		String strPage = request.getParameter("page");
+		if(strPage != null) {
+			page = Integer.parseInt(strPage);
+		}		
 		int cnt = 10; //content view count
+		int sIdx = (page - 1) * cnt;
+		
+		BoardVO param = new BoardVO();
+		param.setsIdx(sIdx);
+		param.setRowCnt(cnt);
 		
 		//DB로부터 리스트를 가져온다.
+		request.setAttribute("page", page);
 		request.setAttribute("totalPageCnt", BoardDAO.getTotalPageCnt(cnt));
-		request.setAttribute("list", BoardDAO.getBoardList());
+		request.setAttribute("list", BoardDAO.getBoardList(param));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardList.jsp");
 		rd.forward(request, response);
