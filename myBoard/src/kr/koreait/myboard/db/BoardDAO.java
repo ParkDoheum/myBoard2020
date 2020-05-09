@@ -91,6 +91,30 @@ public class BoardDAO {
 		return vo;
 	}
 	
+	public static int getTotalPageCnt(int cnt) {
+		int totalPageCnt = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = " SELECT CEIL(COUNT(i_board) / 10) AS cnt "
+				+ " FROM t_board ";
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				totalPageCnt = rs.getInt("cnt");
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps, rs);
+		}
+		
+		return totalPageCnt;
+	}
 	
 	public static List<BoardVO> getBoardList() {
 		List<BoardVO> list = new ArrayList();

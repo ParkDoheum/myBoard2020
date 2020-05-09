@@ -25,9 +25,10 @@ public class BoardListSev extends HttpServlet {
 			response.sendRedirect("/login");
 			return;
 		}
+		int cnt = 10; //content view count
 		
 		//DB로부터 리스트를 가져온다.
-		
+		request.setAttribute("totalPageCnt", BoardDAO.getTotalPageCnt(cnt));
 		request.setAttribute("list", BoardDAO.getBoardList());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardList.jsp");

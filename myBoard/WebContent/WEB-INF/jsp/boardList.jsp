@@ -55,6 +55,10 @@
 			</tr>
 			</c:forEach>
 		</table>
+		
+		<div>
+			${totalPageCnt }
+		</div>
 	</div>
 	<script>
 		function moveToDetail(i_board, hits) {
