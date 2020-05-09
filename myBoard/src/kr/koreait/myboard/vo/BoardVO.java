@@ -10,7 +10,16 @@ public class BoardVO {
 	private String m_dt;
 	
 	private String u_nickname;
-		
+	private String img;
+			
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	
 	public String getU_nickname() {
 		return u_nickname;
 	}

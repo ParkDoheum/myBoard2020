@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>리스트</title>
 <style>
+	img {
+		width: 20px;
+	}
 	table { 
 		border: 1px solid #000;
 		border-collapse: collapse;
@@ -45,7 +48,10 @@
 				<td>${vo.title }</td>
 				<td class="fontCenter">${vo.hits }</td>
 				<td class="fontCenter">${vo.r_dt }</td>
-				<td class="fontCenter">${vo.u_nickname }</td>
+				<td class="fontCenter">
+					
+					${vo.u_nickname }
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

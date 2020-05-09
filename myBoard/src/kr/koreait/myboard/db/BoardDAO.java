@@ -101,9 +101,13 @@ public class BoardDAO {
 		String sql = " SELECT "
 				+ " A.i_board, A.title, A.hits, A.r_dt "
 				+ " , B.u_nickname "
+				+ " , C.i_user, ifnull(C.img, '') as img "
 				+ " FROM t_board A "
 				+ " INNER JOIN t_user B "
 				+ " ON A.i_user = B.i_user "
+				+ " LEFT JOIN t_user_img C " 
+ 				+ " ON A.i_user = C.i_user "
+				+ " AND C.seq = 1 "
 				+ " ORDER BY r_dt DESC ";
 		
 		try {
@@ -116,14 +120,18 @@ public class BoardDAO {
 				String title = rs.getString("title");
 				int hits = rs.getInt("hits");
 				String r_dt = rs.getString("r_dt");
+				int i_user = rs.getInt("i_user");
 				String u_nickname = rs.getString("u_nickname");
+				String img = rs.getString("img");
 				
 				BoardVO vo = new BoardVO();
 				vo.setI_board(i_board);
 				vo.setTitle(title);
 				vo.setHits(hits);
 				vo.setR_dt(r_dt);
+				vo.setI_user(i_user);
 				vo.setU_nickname(u_nickname);
+				vo.setImg(img);
 				
 				list.add(vo);
 			}			
