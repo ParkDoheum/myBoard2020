@@ -91,17 +91,23 @@ public class BoardDAO {
 		return vo;
 	}
 	
-	public static int getTotalPageCnt(int cnt) {
+	public static int getTotalPageCnt(BoardVO param) {
 		int totalPageCnt = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = " SELECT CEIL(COUNT(i_board) / 10) AS cnt "
+		String sql = " SELECT CEIL(COUNT(i_board) / ?) AS cnt "
 				+ " FROM t_board ";
+		
+		if(param.getSearch() != null) {
+			sql += " WHERE title LIKE '%" + param.getSearch() + "%' ";
+		}		
 		
 		try {
 			con = DbBridge.getCon();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getRowCnt());
+			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {

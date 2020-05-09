@@ -71,7 +71,17 @@
 				</td>
 			</tr>
 			</c:forEach>
-		</table>		
+		</table>	
+		
+		<div id="searchContainer">
+			<form action="/boardList" method="get">
+				<div>
+					검색 <input type="search" name="search">
+					<input type="submit" value="검색">
+				</div>				
+			</form>
+		</div>
+			
 		<div id="pageContainer">
 			<c:forEach var="i" begin="1" end="${totalPageCnt }">				
 				<a href="/boardList?page=${i}">

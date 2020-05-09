@@ -14,7 +14,15 @@ public class BoardVO {
 	
 	private int sIdx; //LIMIT 앞값
 	private int rowCnt; //LIMIT 뒷값
-		
+	
+	private String search;
+			
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public int getsIdx() {
 		return sIdx;
 	}

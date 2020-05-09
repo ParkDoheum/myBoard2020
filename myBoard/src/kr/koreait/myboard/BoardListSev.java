@@ -26,8 +26,9 @@ public class BoardListSev extends HttpServlet {
 			response.sendRedirect("/login");
 			return;
 		}
-		
+		String search = request.getParameter("search");				
 		int page = 1;
+		
 		String strPage = request.getParameter("page");
 		if(strPage != null) {
 			page = Integer.parseInt(strPage);
@@ -38,10 +39,11 @@ public class BoardListSev extends HttpServlet {
 		BoardVO param = new BoardVO();
 		param.setsIdx(sIdx);
 		param.setRowCnt(cnt);
+		param.setSearch(search);
 		
 		//DB로부터 리스트를 가져온다.
 		request.setAttribute("page", page);
-		request.setAttribute("totalPageCnt", BoardDAO.getTotalPageCnt(cnt));
+		request.setAttribute("totalPageCnt", BoardDAO.getTotalPageCnt(param));
 		request.setAttribute("list", BoardDAO.getBoardList(param));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardList.jsp");
