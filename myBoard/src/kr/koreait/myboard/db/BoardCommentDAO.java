@@ -86,7 +86,30 @@ public class BoardCommentDAO {
 		return list;
 	}
 	
-	
+	public static int delComment(BoardCommentVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " DELETE FROM t_board_comment "
+				+ " WHERE i_comment = ? AND i_user = ? ";
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_comment());
+			ps.setInt(2,  param.getI_user());
+			
+			result = ps.executeUpdate();			
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps);
+		}
+		
+		return result;
+	}
 	
 	
 }

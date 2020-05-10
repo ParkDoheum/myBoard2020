@@ -83,7 +83,11 @@
 					${item.user_nm }
 				</div>
 				<div class="commentDel">
-					<button>삭제</button>
+					<c:if test="${item.i_user == loginUser.i_user }">
+						<a href="/boardComment?i_comment=${item.i_comment}">
+							<button>삭제</button>
+						</a>
+					</c:if>
 				</div>
 			</div>
 		</c:forEach>

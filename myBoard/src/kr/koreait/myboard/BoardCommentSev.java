@@ -19,7 +19,21 @@ public class BoardCommentSev extends HttpServlet {
 
 	//삭제
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession hs = request.getSession();
+		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
+		
+		String i_comment = request.getParameter("i_comment");		
+		int int_comment = Utils.parseStringToInt(i_comment, 0);
+		
+		System.out.println("int_comment: " + int_comment);
+		System.out.println("i_user: " + loginUser.getI_user());
+		
+		BoardCommentVO param = new BoardCommentVO();
+		param.setI_comment(int_comment);
+		param.setI_user(loginUser.getI_user());
+		
+		int result = BoardCommentDAO.delComment(param);
+		response.sendRedirect("/boardDetail?i_board=" + i_board);
 	}
 
 	//등록
