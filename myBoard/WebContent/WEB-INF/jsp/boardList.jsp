@@ -22,6 +22,13 @@
 	.fontCenter { text-align: center; }
 	.pointer { 	cursor: pointer; }
 	.trSelected:hover { background-color: #ecf0f1 }
+	
+	#searchContainer {
+		margin-top: 40px;
+		display: flex;
+		justify-content: center;
+	}
+	
 	#pageContainer {
 		margin-top: 40px;
 		display: flex;
@@ -65,8 +72,7 @@
 				<td>${vo.title }</td>
 				<td class="fontCenter">${vo.hits }</td>
 				<td class="fontCenter">${vo.r_dt }</td>
-				<td class="fontCenter">
-					
+				<td class="fontCenter">					
 					${vo.u_nickname }
 				</td>
 			</tr>

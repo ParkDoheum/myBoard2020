@@ -128,18 +128,19 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = " SELECT "
-				+ " A.i_board, A.title, A.hits, A.r_dt "
-				+ " , B.u_nickname "
-				+ " , C.i_user, ifnull(C.img, '') as img "
+		String sql = " SELECT A.i_board, A.title, A.hits, A.r_dt "
+				+ " , B.u_nickname , C.i_user, ifnull(C.img, '') as img "
 				+ " FROM t_board A "
 				+ " INNER JOIN t_user B "
 				+ " ON A.i_user = B.i_user "
 				+ " LEFT JOIN t_user_img C " 
  				+ " ON A.i_user = C.i_user "
-				+ " AND C.seq = 1 "
-				+ " ORDER BY r_dt DESC"
-				+ " LIMIT ?, ? ";
+				+ " AND C.seq = 1 ";
+			
+		if(param.getSearch() != null) {
+			sql += " WHERE title LIKE '%" + param.getSearch() + "%' ";
+		}		
+		sql += " ORDER BY r_dt DESC LIMIT ?, ? ";
 		
 		try {
 			con = DbBridge.getCon();
