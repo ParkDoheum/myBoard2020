@@ -6,6 +6,39 @@
 <head>
 <meta charset="UTF-8">
 <title>디테일</title>
+<style>
+	.commentItem {
+		display: flex;
+	}
+	
+	.commentItem .r_dt {
+		font-size: 12px;
+		color: #95a5a6;
+	}
+	
+	.commentContent {
+		width: 500px;
+	}
+	
+	.commentUser {
+		display: flex;
+		align-items: center;
+	}
+	
+	.circular--portrait {
+	  position: relative;
+	  width: 50px;
+	  height: 50px;
+	  overflow: hidden;
+	  border-radius: 50%;
+	  border: 1px solid #f1f2f6;
+	}
+	
+	.circular--portrait img {
+	  width: 100%;
+	  height: 100%;	  
+	}
+</style>
 </head>
 <body>
 
@@ -32,7 +65,28 @@
 	</div>
 	
 	<div>
-		댓글리스트
+		<c:forEach var="item" items="${commentList}">
+			<div class="commentItem">
+				<div class="commentContent">
+					<div>${item.content }</div>
+					<div class="r_dt">${item.r_dt }</div>
+				</div>
+				<div class="commentUser">
+					<div class="circular--portrait">
+						<c:if test="${item.user_img eq null}">
+							<img src="/img/noProfile.png" alt="프로필 이미지 없음">
+						</c:if>
+						<c:if test="${item.user_img != null}">						
+							<img src="/img/${item.i_user}/${item.user_img}" alt="프로필 이미지">						
+						</c:if>
+					</div>
+					${item.user_nm }
+				</div>
+				<div class="commentDel">
+					<button>삭제</button>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
 	
 	<script>

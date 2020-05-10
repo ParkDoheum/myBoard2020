@@ -43,7 +43,7 @@ public class BoardCommentDAO {
 		ResultSet rs = null;
 		
 		String sql = " SELECT "
-				+ " A.i_comment, A.content, A.r_dt "
+				+ " A.i_comment, A.content, A.r_dt, A.i_user "
 				+ " , B.u_nickname as user_nm, C.img as user_img "
 				+ " FROM t_board_comment A "
 				+ " INNER JOIN t_user B "
@@ -63,6 +63,7 @@ public class BoardCommentDAO {
 				int i_comment = rs.getInt("i_comment");
 				String content = rs.getString("content");
 				String r_dt = rs.getString("r_dt");
+				int i_user = rs.getInt("i_user");
 				String user_nm = rs.getString("user_nm");
 				String user_img = rs.getString("user_img");
 				
@@ -70,6 +71,7 @@ public class BoardCommentDAO {
 				vo.setI_comment(i_comment);
 				vo.setContent(content);
 				vo.setR_dt(r_dt);
+				vo.setI_user(i_user);
 				vo.setUser_nm(user_nm);
 				vo.setUser_img(user_img);
 				

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.koreait.myboard.db.BoardCommentDAO;
 import kr.koreait.myboard.db.BoardDAO;
 import kr.koreait.myboard.vo.BoardVO;
 
@@ -33,6 +34,8 @@ public class BoardDetailSev extends HttpServlet {
 		
 		BoardDAO.updateBoardHits(param);			
 		request.setAttribute("detail", BoardDAO.getBoard(param));
+		
+		request.setAttribute("commentList", BoardCommentDAO.getBoardCommentList(intI_board));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardDetail.jsp");
 		rd.forward(request, response);
