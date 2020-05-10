@@ -84,7 +84,7 @@
 				</div>
 				<div class="commentDel">
 					<c:if test="${item.i_user == loginUser.i_user }">
-						<a href="/boardComment?i_comment=${item.i_comment}">
+						<a href="/boardComment?i_comment=${item.i_comment}&i_board=${detail.i_board}">
 							<button>삭제</button>
 						</a>
 					</c:if>

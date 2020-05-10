@@ -19,9 +19,12 @@ public class BoardDetailSev extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String commentResult = request.getParameter("commentResult");
+		String commentDelResult = request.getParameter("commentDelResult");
 				
 		if("0".equals(commentResult)) {
 			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
+		} else if("0".equals(commentDelResult)) {
+			request.setAttribute("msg", "댓글 삭제에 실패하였습니다.");
 		}
 		
 		String i_board = request.getParameter("i_board");		

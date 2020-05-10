@@ -22,7 +22,9 @@ public class BoardCommentSev extends HttpServlet {
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
 		
-		String i_comment = request.getParameter("i_comment");		
+		String i_comment = request.getParameter("i_comment");
+		System.out.println("i_comment: " + i_comment);
+		String i_board = request.getParameter("i_board");
 		int int_comment = Utils.parseStringToInt(i_comment, 0);
 		
 		System.out.println("int_comment: " + int_comment);
@@ -33,7 +35,8 @@ public class BoardCommentSev extends HttpServlet {
 		param.setI_user(loginUser.getI_user());
 		
 		int result = BoardCommentDAO.delComment(param);
-		response.sendRedirect("/boardDetail?i_board=" + i_board);
+		response.sendRedirect("/boardDetail?i_board=" + i_board 
+				+ "&commentDelResult=" + result);
 	}
 
 	//등록
