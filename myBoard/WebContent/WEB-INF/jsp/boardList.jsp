@@ -67,7 +67,7 @@
 			</tr>
 			
 			<c:forEach var="vo" items="${list}">
-			<tr class="pointer trSelected" onclick="moveToDetail(${vo.i_board}, ${vo.hits})">
+			<tr class="pointer trSelected" onclick="moveToDetail(${vo.i_board})">
 				<td class="fontCenter">${vo.i_board }</td>
 				<td>${vo.title }</td>
 				<td class="fontCenter">${vo.hits }</td>
@@ -82,7 +82,7 @@
 		<div id="searchContainer">
 			<form action="/boardList" method="get">
 				<div>
-					검색 <input type="search" name="search">
+					검색 <input type="search" name="search" value="${param.search }">
 					<input type="submit" value="검색">
 				</div>				
 			</form>
@@ -90,7 +90,7 @@
 			
 		<div id="pageContainer">
 			<c:forEach var="i" begin="1" end="${totalPageCnt }">				
-				<a href="/boardList?page=${i}">
+				<a href="/boardList?page=${i}&search=${param.search}">
 				<span <c:if test="${i == page}">class="selected"</c:if>>				
 				${i}
 				</span>
@@ -99,8 +99,8 @@
 		</div>
 	</div>
 	<script>
-		function moveToDetail(i_board, hits) {
-			location.href = '/boardDetail?i_board=' + i_board + '&hits=' + hits
+		function moveToDetail(i_board) {
+			location.href = '/boardDetail?i_board=' + i_board
 		}
 	</script>
 </body>
