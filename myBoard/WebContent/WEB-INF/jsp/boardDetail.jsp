@@ -22,6 +22,19 @@
 			<button onclick="clkDelBtn(${detail.i_board})">삭제</button>
 		</div>
 	</c:if>
+	
+	<div>
+		<form action="/boardComment" method="post" onsubmit="return chkComment()">
+			<input type="hidden" name="i_board" value="?????">
+			<textarea rows="20" cols="6" name="content" placeholder="댓글달기"></textarea>
+			<input type="submit" value="등록">
+		</form>
+	</div>
+	
+	<div>
+		댓글리스트
+	</div>
+	
 	<script>
 		function clkDelBtn(i_board) {
 			var result = confirm(i_board + '번 글을 삭제하시겠습니까?')
