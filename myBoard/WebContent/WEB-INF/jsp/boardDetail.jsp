@@ -24,9 +24,9 @@
 	</c:if>
 	
 	<div>
-		<form action="/boardComment" method="post" onsubmit="return chkComment()">
-			<input type="hidden" name="i_board" value="?????">
-			<textarea rows="20" cols="6" name="content" placeholder="댓글달기"></textarea>
+		<form action="/boardComment" id="frm" method="post" onsubmit="return chkComment()">
+			<input type="hidden" name="i_board" value="${detail.i_board}">
+			<textarea rows="3" cols="40" name="content" placeholder="댓글달기"></textarea>
 			<input type="submit" value="등록">
 		</form>
 	</div>
@@ -36,11 +36,23 @@
 	</div>
 	
 	<script>
+		function chkComment() {
+			if(frm.content.value.length == 0) {
+				alert('댓글 내용을 작성해 주세요!')
+				return false
+			}
+		}
 		function clkDelBtn(i_board) {
 			var result = confirm(i_board + '번 글을 삭제하시겠습니까?')
 			if(result) {
 				location.href = '/boardDel?i_board=' + i_board	
 			}
+		}
+		
+		var msg = '${msg}'
+		
+		if(msg != '' && msg != undefined) {
+			alert(msg)
 		}
 	</script>
 </body>

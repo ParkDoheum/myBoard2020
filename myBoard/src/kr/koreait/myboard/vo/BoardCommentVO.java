@@ -1,14 +1,21 @@
 package kr.koreait.myboard.vo;
 
 public class BoardCommentVO {
+	private int i_comment;
 	private int i_board;	
 	private String content;
 	private int i_user;
 	private String r_dt;
 	
-	private int user_nm;
-	private int user_img;
-	
+	private String user_nm;
+	private String user_img;
+		
+	public int getI_comment() {
+		return i_comment;
+	}
+	public void setI_comment(int i_comment) {
+		this.i_comment = i_comment;
+	}
 	public int getI_board() {
 		return i_board;
 	}
@@ -33,18 +40,16 @@ public class BoardCommentVO {
 	public void setR_dt(String r_dt) {
 		this.r_dt = r_dt;
 	}
-	public int getUser_nm() {
+	public String getUser_nm() {
 		return user_nm;
 	}
-	public void setUser_nm(int user_nm) {
+	public void setUser_nm(String user_nm) {
 		this.user_nm = user_nm;
 	}
-	public int getUser_img() {
+	public String getUser_img() {
 		return user_img;
 	}
-	public void setUser_img(int user_img) {
+	public void setUser_img(String user_img) {
 		this.user_img = user_img;
 	}
-	
-	
 }

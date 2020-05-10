@@ -17,6 +17,12 @@ public class BoardDetailSev extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String commentResult = request.getParameter("commentResult");
+				
+		if("0".equals(commentResult)) {
+			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
+		}
+		
 		String i_board = request.getParameter("i_board");		
 		int intI_board = Integer.parseInt(i_board);
 				
